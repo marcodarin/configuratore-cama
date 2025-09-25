@@ -1,36 +1,138 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Configuratore Tende a Rullo Cama
 
-## Getting Started
+Una webapp per generare render realistici di tende a rullo utilizzando l'AI di Google Gemini.
 
-First, run the development server:
+## Caratteristiche
+
+- Interfaccia moderna e intuitiva
+- Selezione tessuti da cartella immagini
+- Upload immagini stanza con drag & drop
+- **Generazione render realistici** con Google Gemini 2.5 Flash Image Preview
+- Design responsive ottimizzato per mobile
+- Notifiche toast per feedback utente
+
+## Setup del Progetto
+
+### 1. Installazione Dipendenze
+
+```bash
+npm install
+```
+
+### 2. Configurazione Variabili d'Ambiente
+
+Copia il file `env.example` in `.env.local`:
+
+```bash
+cp env.example .env.local
+```
+
+Modifica `.env.local` con le tue credenziali:
+
+```env
+GOOGLE_GEMINI_API_KEY=your_gemini_api_key_here
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+```
+
+### 3. Aggiungere Tessuti
+
+1. Crea la cartella `public/fabrics` se non esiste
+2. Aggiungi le immagini dei tessuti (JPG, PNG, WebP)
+3. Il nome del file diventerà il nome del tessuto nell'interfaccia
+
+Esempio:
+```
+public/fabrics/
+├── cotone-bianco.jpg
+├── lino-naturale.png
+├── seta-blu.webp
+└── canvas-grigio.jpg
+```
+
+### 4. Avvio Sviluppo
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Apri [http://localhost:3000](http://localhost:3000) nel browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deploy su Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. Setup Repository
 
-## Learn More
+```bash
+git add .
+git commit -m "Initial commit"
+git push origin main
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 2. Deploy su Vercel
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Connetti il repository a Vercel
+2. Configura le variabili d'ambiente nel dashboard Vercel:
+   - `GOOGLE_GEMINI_API_KEY`
+   - `NEXT_PUBLIC_BASE_URL` (URL del tuo deploy)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 3. Configurazione Dominio
 
-## Deploy on Vercel
+Aggiorna `NEXT_PUBLIC_BASE_URL` con l'URL finale del deploy.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Struttura del Progetto
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+├── app/
+│   ├── api/
+│   │   ├── fabrics/         # API per ottenere lista tessuti
+│   │   └── generate-render/ # API per generazione render
+│   ├── layout.tsx          # Layout principale
+│   └── page.tsx            # Homepage
+├── components/
+│   ├── ui/                 # Componenti Shadcn UI
+│   ├── fabric-selector.tsx # Selezione tessuti
+│   ├── render-generator.tsx # Generazione render
+│   ├── room-uploader.tsx   # Upload immagini
+│   └── topbar.tsx          # Header con logo
+└── store/
+    └── app-store.ts        # Store Zustand per stato globale
+```
+
+## Tecnologie Utilizzate
+
+- **Next.js 14** - Framework React con App Router
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Styling utility-first
+- **Shadcn/ui** - Componenti UI moderni
+- **Zustand** - Gestione stato globale
+- **Google Gemini AI** - Generazione render con AI
+- **Sonner** - Notifiche toast
+- **Lucide React** - Icone
+
+## API Endpoints
+
+### GET /api/fabrics
+Restituisce la lista dei tessuti disponibili dalla cartella `public/fabrics`.
+
+### POST /api/generate-render
+Genera un render utilizzando Google Gemini.
+
+**Body (FormData):**
+- `roomImage`: File immagine della stanza
+- `fabricImagePath`: Path del tessuto selezionato
+
+## Note per lo Sviluppo
+
+1. **Tessuti**: Aggiungi le immagini dei tessuti nella cartella `public/fabrics`
+2. **API Key**: Ottieni una chiave API Google Gemini da [Google AI Studio](https://makersuite.google.com/app/apikey)
+3. **Limiti**: Controlla i limiti di rate delle API Google Gemini
+4. **Immagini**: Supporta JPG, PNG, WebP fino a 10MB
+
+## Prossimi Sviluppi
+
+- [ ] Integrazione con servizi di generazione immagini (Midjourney, DALL-E)
+- [ ] Cache dei render generati
+- [ ] Sistema di autenticazione utenti
+- [ ] Galleria render salvati
+- [ ] Esportazione render in diversi formati
+- [ ] Integrazione e-commerce per ordinazione tende
