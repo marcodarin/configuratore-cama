@@ -31,7 +31,7 @@ export function RenderGenerator() {
     try {
       const formData = new FormData()
       formData.append('roomImage', roomImage)
-      formData.append('fabricImagePath', selectedFabric.imagePath)
+      formData.append('fabricImageUrl', selectedFabric.imageUrl)
 
       const response = await fetch('/api/generate-render', {
         method: 'POST',
@@ -91,7 +91,7 @@ export function RenderGenerator() {
                   </p>
                   <div className="relative aspect-square rounded-lg overflow-hidden">
                     <Image
-                      src={selectedFabric.imagePath}
+                      src={selectedFabric.imageUrl}
                       alt={selectedFabric.name}
                       fill
                       className="object-cover"

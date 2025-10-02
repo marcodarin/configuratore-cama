@@ -11,9 +11,9 @@ export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData()
     const roomImageFile = formData.get('roomImage') as File
-    const fabricImagePath = formData.get('fabricImagePath') as string
+    const fabricImageUrl = formData.get('fabricImageUrl') as string
 
-    if (!roomImageFile || !fabricImagePath) {
+    if (!roomImageFile || !fabricImageUrl) {
       return NextResponse.json(
         { error: 'Mancano parametri necessari' },
         { status: 400 }
@@ -24,20 +24,29 @@ export async function POST(req: NextRequest) {
     const roomImageBuffer = await roomImageFile.arrayBuffer()
     const roomImageBase64 = Buffer.from(roomImageBuffer).toString('base64')
 
-    // Get fabric image from local filesystem
-    const fabricImageFullPath = path.join(process.cwd(), 'public', fabricImagePath)
-    const fabricImageBuffer = fs.readFileSync(fabricImageFullPath)
-    const fabricImageBase64 = fabricImageBuffer.toString('base64')
+    // Fetch fabric image from URL
+    const fabricImageResponse = await fetch(fabricImageUrl)
+    if (!fabricImageResponse.ok) {
+      throw new Error('Impossibile scaricare l\'immagine del tessuto')
+    }
+    const fabricImageBuffer = await fabricImageResponse.arrayBuffer()
+    const fabricImageBase64 = Buffer.from(fabricImageBuffer).toString('base64')
 
     // Determine MIME types
     const roomImageMimeType = roomImageFile.type
-    const fabricImageExtension = path.extname(fabricImagePath).toLowerCase()
-    let fabricImageMimeType = 'image/jpeg'
     
-    if (fabricImageExtension === '.png') {
-      fabricImageMimeType = 'image/png'
-    } else if (fabricImageExtension === '.webp') {
-      fabricImageMimeType = 'image/webp'
+    // Detect fabric image MIME type from URL or Content-Type header
+    const fabricContentType = fabricImageResponse.headers.get('content-type')
+    let fabricImageMimeType = fabricContentType || 'image/jpeg'
+    
+    // Fallback to extension-based detection if needed
+    if (!fabricContentType) {
+      const urlExt = fabricImageUrl.split('.').pop()?.toLowerCase()
+      if (urlExt === 'png') {
+        fabricImageMimeType = 'image/png'
+      } else if (urlExt === 'webp') {
+        fabricImageMimeType = 'image/webp'
+      }
     }
 
     // Create the prompt for image generation

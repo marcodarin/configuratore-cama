@@ -46,7 +46,7 @@ export function FabricSelector() {
               <CardContent className="p-3">
                 <div className="relative aspect-square mb-2 rounded-md overflow-hidden">
                   <Image
-                    src={fabric.imagePath}
+                    src={fabric.imageUrl}
                     alt={fabric.name}
                     fill
                     className="object-cover"

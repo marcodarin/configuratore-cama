@@ -1,8 +1,10 @@
 import { create } from 'zustand'
 
 export interface Fabric {
+  id: number
   name: string
-  imagePath: string
+  imageUrl: string
+  createdAt?: string
 }
 
 interface AppState {
