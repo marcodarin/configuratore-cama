@@ -8,7 +8,7 @@ import { useAppStore } from '@/store/app-store'
 import { convertGoogleDriveUrl } from '@/lib/utils'
 
 const fabricTypes = [
-  { value: '', label: 'Tutte le tipologie' },
+  { value: 'all', label: 'Tutte le tipologie' },
   { value: 'Tessuti filtranti', label: 'Tessuti filtranti' },
   { value: 'Tessuti oscuranti', label: 'Tessuti oscuranti' },
   { value: 'Tessuti a fantasia', label: 'Tessuti a fantasia' },
@@ -17,7 +17,7 @@ const fabricTypes = [
 ]
 
 const colors = [
-  { value: '', label: 'Tutti i colori' },
+  { value: 'all', label: 'Tutti i colori' },
   { value: 'Bianco', label: 'Bianco' },
   { value: 'Beige/ avorio', label: 'Beige/Avorio' },
   { value: 'Marroni/bronzi', label: 'Marroni/Bronzi' },
@@ -54,8 +54,8 @@ export function FabricSelector () {
   // Filtra i tessuti in base ai filtri selezionati
   const filteredFabrics = useMemo(() => {
     return fabrics.filter(fabric => {
-      const matchesFabricType = !selectedFabricType || fabric.fabricType === selectedFabricType
-      const matchesColor = !selectedColor || fabric.color === selectedColor
+      const matchesFabricType = selectedFabricType === 'all' || !selectedFabricType || fabric.fabricType === selectedFabricType
+      const matchesColor = selectedColor === 'all' || !selectedColor || fabric.color === selectedColor
       return matchesFabricType && matchesColor
     })
   }, [fabrics, selectedFabricType, selectedColor])
