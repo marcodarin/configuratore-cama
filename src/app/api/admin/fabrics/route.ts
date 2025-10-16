@@ -36,10 +36,10 @@ export async function GET (request: NextRequest) {
         createdAt: f.created_at
       }))
     })
-  } catch (error: any) {
+  } catch (error) {
     console.error('Error fetching fabrics:', error)
     return NextResponse.json(
-      { success: false, error: error.message || 'Failed to fetch fabrics' },
+      { success: false, error: 'Failed to fetch fabrics' },
       { status: 500 }
     )
   }
@@ -81,10 +81,10 @@ export async function POST (request: NextRequest) {
         createdAt: result[0].created_at
       }
     })
-  } catch (error: any) {
+  } catch (error) {
     console.error('Error adding fabric:', error)
     return NextResponse.json(
-      { success: false, error: error.message || 'Failed to add fabric' },
+      { success: false, error: 'Failed to add fabric' },
       { status: 500 }
     )
   }
@@ -112,10 +112,10 @@ export async function DELETE (request: NextRequest) {
     await sql`DELETE FROM fabrics WHERE id = ${id}`
 
     return NextResponse.json({ success: true })
-  } catch (error: any) {
+  } catch (error) {
     console.error('Error deleting fabric:', error)
     return NextResponse.json(
-      { success: false, error: error.message || 'Failed to delete fabric' },
+      { success: false, error: 'Failed to delete fabric' },
       { status: 500 }
     )
   }

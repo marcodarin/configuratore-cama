@@ -125,10 +125,11 @@ Genera SOLO l'immagine del risultato finale, senza testo o didascalie.`
       { success: false, error: 'No image data in response' },
       { status: 500 }
     )
-  } catch (error: any) {
+  } catch (error) {
     console.error('Error generating render:', error)
+    const errorMessage = error instanceof Error ? error.message : 'Failed to generate render'
     return NextResponse.json(
-      { success: false, error: error.message || 'Failed to generate render' },
+      { success: false, error: errorMessage },
       { status: 500 }
     )
   }

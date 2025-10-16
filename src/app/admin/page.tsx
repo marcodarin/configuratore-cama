@@ -87,7 +87,7 @@ export default function AdminPage () {
       } else {
         toast.error('Password non valida')
       }
-    } catch (error) {
+    } catch {
       toast.error('Errore durante il login')
     } finally {
       setIsLoggingIn(false)
@@ -104,7 +104,7 @@ export default function AdminPage () {
       const data = await response.json()
 
       if (data.success) {
-        setFabrics(data.fabrics.map((f: any) => ({
+        setFabrics(data.fabrics.map((f: Fabric) => ({
           ...f,
           fabricType: f.fabricType || '',
           color: f.color || ''
@@ -112,7 +112,7 @@ export default function AdminPage () {
       } else {
         toast.error('Errore nel caricamento dei tessuti')
       }
-    } catch (error) {
+    } catch {
       toast.error('Errore durante il caricamento')
     } finally {
       setIsLoading(false)
@@ -156,7 +156,7 @@ export default function AdminPage () {
       } else {
         toast.error(data.error || 'Errore durante l\'aggiunta')
       }
-    } catch (error) {
+    } catch {
       toast.error('Errore durante l\'aggiunta')
     } finally {
       setIsAdding(false)
@@ -186,7 +186,7 @@ export default function AdminPage () {
       } else {
         toast.error('Errore durante l\'eliminazione')
       }
-    } catch (error) {
+    } catch {
       toast.error('Errore durante l\'eliminazione')
     }
   }
