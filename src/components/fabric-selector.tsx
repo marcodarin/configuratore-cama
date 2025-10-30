@@ -18,17 +18,17 @@ const fabricTypes = [
 
 const colors = [
   { value: 'all', label: 'Tutti i colori' },
-  { value: 'Bianco', label: 'Bianco' },
+  { value: 'Arancio', label: 'Arancio' },
+  { value: 'Azzurro', label: 'Azzurro' },
   { value: 'Beige/ avorio', label: 'Beige/Avorio' },
-  { value: 'Marroni/bronzi', label: 'Marroni/Bronzi' },
+  { value: 'Bianco', label: 'Bianco' },
+  { value: 'Giallo', label: 'Giallo' },
   { value: 'Grigio/ tortora', label: 'Grigio/Tortora' },
+  { value: 'Marroni/bronzi', label: 'Marroni/Bronzi' },
+  { value: 'Multicolor', label: 'Multicolor' },
   { value: 'Rosa', label: 'Rosa' },
   { value: 'Rosso', label: 'Rosso' },
-  { value: 'Arancio', label: 'Arancio' },
-  { value: 'Verde', label: 'Verde' },
-  { value: 'Azzurro', label: 'Azzurro' },
-  { value: 'Giallo', label: 'Giallo' },
-  { value: 'Multicolor', label: 'Multicolor' }
+  { value: 'Verde', label: 'Verde' }
 ]
 
 export function FabricSelector () {

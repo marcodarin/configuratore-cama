@@ -41,17 +41,17 @@ export default function AdminPage () {
   ]
 
   const colors = [
-    'Bianco',
+    'Arancio',
+    'Azzurro',
     'Beige/ avorio',
-    'Marroni/bronzi',
+    'Bianco',
+    'Giallo',
     'Grigio/ tortora',
+    'Marroni/bronzi',
+    'Multicolor',
     'Rosa',
     'Rosso',
-    'Arancio',
-    'Verde',
-    'Azzurro',
-    'Giallo',
-    'Multicolor'
+    'Verde'
   ]
 
   useEffect(() => {
