@@ -68,6 +68,41 @@ export function RoomUploader() {
         Carica l&apos;immagine della stanza
       </h2>
       
+      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+        <h3 className="font-semibold text-blue-900 mb-2 flex items-center gap-2">
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          Come scattare la foto della finestra
+        </h3>
+        <ul className="space-y-2 text-sm text-blue-900">
+          <li className="flex items-start gap-2">
+            <span className="text-blue-600 font-bold mt-0.5">•</span>
+            <span>
+              <strong>Inquadratura completa:</strong> La foto deve includere <strong>tutta la parete dal soffitto al pavimento</strong>, con tutti e 4 gli angoli della finestra visibili
+            </span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-blue-600 font-bold mt-0.5">•</span>
+            <span>
+              <strong>Posizionamento:</strong> Scatta la foto frontalmente alla finestra, mantenendo la fotocamera parallela al muro per evitare distorsioni prospettiche
+            </span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-blue-600 font-bold mt-0.5">•</span>
+            <span>
+              <strong>Tende:</strong> Rimuovi le tende o aprile completamente per rendere la superficie della finestra il più visibile possibile
+            </span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-blue-600 font-bold mt-0.5">•</span>
+            <span>
+              <strong>Illuminazione:</strong> Assicurati che la luce sia uniforme e che la finestra sia ben illuminata
+            </span>
+          </li>
+        </ul>
+      </div>
+      
       {!roomImage ? (
         <Card
           className={`border-2 border-dashed transition-colors ${

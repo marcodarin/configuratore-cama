@@ -56,24 +56,22 @@ export async function POST (request: NextRequest) {
     // Get room image mime type
     const roomMimeType = roomImage.type || 'image/jpeg'
 
-    const prompt = `Sei un esperto di interior design specializzato nella visualizzazione di tende a rullo.
+    const prompt = `Sei un esperto di fotomontaggi iperrealistici specializzato in tende a rullo.
 
-Ti fornisco due immagini di riferimento:
-1. Una stanza con finestre (immagine 1)
-2. Un tessuto per tende a rullo (immagine 2)
+La prima immagine è la foto reale di una finestra in un ambiente di casa.
+La seconda immagine mostra una tenda a rullo.
 
-Genera un render fotorealistico che mostri come apparirebbero le tende a rullo realizzate con il tessuto dell'immagine 2, installate sulle finestre della stanza dell'immagine 1.
+Il tuo compito: crea un fotomontaggio iperrealistico che ambienti la tenda a rullo della seconda immagine nella foto dell'ambiente della prima immagine.
 
-Linee guida importanti:
-- Le tende devono essere a RULLO (roller blinds), non altri tipi di tende
-- Il tessuto delle tende deve riflettere fedelmente la texture, il pattern e il colore del tessuto fornito nell'immagine 2
-- Le tende devono essere posizionate all'interno del vano finestra o appena sopra
-- Mantieni lo stile e l'illuminazione della stanza originale dell'immagine 1
+REQUISITI FONDAMENTALI DEL FOTOMONTAGGIO:
+- La tenda a rullo DEVE TOCCARE IL SOFFITTO PRINCIPALE DELLA STANZA
+- La tenda a rullo DEVE COPRIRE COMPLETAMENTE LA FINESTRA con installazione OUTSIDE MOUNTING (montaggio esterno)
+- Il tessuto della tenda deve avere esattamente la stessa texture, pattern e colore della seconda immagine
+- Mantieni l'illuminazione e lo stile originale della stanza
 - Il risultato deve essere fotorealistico e professionale
-- Le tende devono apparire naturali e ben integrate nell'ambiente
 - Non aggiungere testo, watermark o didascalie
 
-Genera l'immagine del risultato finale.`
+Genera il fotomontaggio finale.`
 
     const response = await genAI.models.generateContent({
       model: 'gemini-2.5-flash-image',
