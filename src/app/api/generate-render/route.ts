@@ -102,8 +102,7 @@ Genera il fotomontaggio finale.`
       config: {
         responseModalities: ['TEXT', 'IMAGE'],
         imageConfig: {
-          aspectRatio: '4:3',
-          imageSize: '1K'
+          aspectRatio: '4:3'
         }
       }
     })
