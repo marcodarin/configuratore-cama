@@ -14,18 +14,22 @@ export default function Home() {
             Configuratore Tende a Rullo
           </h1>
           <p className="text-gray-600">
-            Seleziona un tessuto, carica l&apos;immagine della tua stanza e genera un render realistico
+            Carica l&apos;immagine della tua stanza, seleziona un tessuto e genera un render realistico
           </p>
         </div>
 
+        {/* Risultato - appare in alto quando generato */}
+        <RenderGenerator />
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div className="space-y-8">
-            <FabricSelector />
+          {/* Area caricamento - prima */}
+          <div>
             <RoomUploader />
           </div>
           
+          {/* Tessuti - dopo */}
           <div>
-            <RenderGenerator />
+            <FabricSelector />
           </div>
         </div>
       </main>

@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { GoogleGenAI } from '@google/genai'
 
+// Aumenta il timeout per permettere a Gemini 3 Pro di completare la generazione
+// Vercel Hobby: max 60s, Vercel Pro: max 300s
+export const maxDuration = 120
+
 const genAI = new GoogleGenAI({ apiKey: process.env.GOOGLE_GEMINI_API_KEY || '' })
 
 function convertGoogleDriveUrl (url: string): string {
@@ -74,7 +78,7 @@ REQUISITI FONDAMENTALI DEL FOTOMONTAGGIO:
 Genera il fotomontaggio finale.`
 
     const response = await genAI.models.generateContent({
-      model: 'gemini-2.5-flash-image',
+      model: 'gemini-3-pro-image-preview',
       contents: [
         {
           role: 'user',
@@ -94,7 +98,14 @@ Genera il fotomontaggio finale.`
             }
           ]
         }
-      ]
+      ],
+      config: {
+        responseModalities: ['TEXT', 'IMAGE'],
+        imageConfig: {
+          aspectRatio: '4:3',
+          imageSize: '1K'
+        }
+      }
     })
     
     // Check if response contains image
